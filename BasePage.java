@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage {
     public WebDriver driver;
     public WebDriverWait wait;
-    //By acceptCookiesButtonBy = By.id("NESTO");
 
     public BasePage (WebDriver driver) {
         this.driver = driver;
@@ -50,8 +49,12 @@ public class BasePage {
         return driver.findElements(elementBy).size();
     }
          
-    public void assertIntegerEquals (int ExpectedInt, int actualInt){
-        Assert.assertEquals(ExpectedInt, actualInt);
+    public void assertIntegerEquals (int expectedInt, int actualInt){
+        Assert.assertEquals(expectedInt, actualInt);
+    }
+
+    public void assertDoubleEquals (double expectedDouble, double actualDouble){
+        Assert.assertEquals(expectedDouble, actualDouble, 0.0001);
     }
 
     public String readLink (By elementBy){

@@ -22,6 +22,14 @@ public class ShoppingTests extends BaseTest {
     String firstName = "Biljana";
     String lastName = "Krstic";
     String postalCode = "11300";
+    String expectedTextCheckoutOverview = "Checkout: Overview";
+    String expectedTextSauceLabsPack = "Sauce Labs Backpack";
+    String expectedTextSauceLabsBikeLight = "Sauce Labs Bike Light";
+    Double expectedPrice = 43.18;
+    Double expectedPriceProba = 25.90;
+    String expectedMessageSuccessOrder = "Thank you for your order!";
+    String expectedTextSauceLabsOnesie = "Sauce Labs Onesie";
+    String expectedTextTestAllTheThings = "Test.allTheThings() T-Shirt (Red)";
 
 @Test
 public void verifySuccessfulAddedToCart(){
@@ -30,7 +38,7 @@ public void verifySuccessfulAddedToCart(){
     loginPage.basePage();
     loginPage.login(standardUserName, password);
     homePage.verifySuccessfulLogin(homePageTitle);
-    homePage.verifyProductsAddedToCart();
+    homePage.verifyProductAddedToCart();
 
 try {
     Thread.sleep(5000);
@@ -92,19 +100,25 @@ public void verifySort(){
 public void wholeTask(){
     LoginPage loginPage = new LoginPage(driver);
     HomePage homePage = new HomePage(driver);
-    CartPage cart = new CartPage (driver);
+    CartPage cartPage = new CartPage (driver);
     CheckoutPage checkoutPage = new CheckoutPage (driver);
     loginPage.basePage();
     loginPage.login(standardUserName, password);
     homePage.verifySuccessfulLogin(homePageTitle);
-    homePage.verifyProductsAddedToCart();
+    homePage.addProductsToCartProba();
     homePage.clickOnShoppingCartButton();
     cartPage.verifyCartIsOpened(expectedTextYourCart);
+    cartPage.verifyProduct5AddedToCart(expectedTextSauceLabsOnesie);
+    cartPage.verifyProduct6AddedToCart(expectedTextTestAllTheThings);
     cartPage.clickOnCheckoutButton();
-    //checkoutPage.verifyCheckoutInformationPageIsOpened(expectedTextCheckoutInformation);
-    //checkoutPage.enterInformations(firstName, lastName, postalCode);
-    //checkoutPage.clickOnContinueButton();
-    
+    checkoutPage.verifyCheckoutInformationIsDisplayed(expectedTextCheckoutInformation);
+    checkoutPage.enterInformations(firstName, lastName, postalCode);
+    checkoutPage.clickOnContinueButton();
+    checkoutPage.verifyCheckoutOverviewIsDisplayed(expectedTextCheckoutOverview);
+    checkoutPage.verifyTotalPriceProba(expectedPriceProba);
+    checkoutPage.clickOnFinishButton();
+    checkoutPage.verifySuccessOrderMessage(expectedMessageSuccessOrder);
+
     
     try {
         Thread.sleep(5000);

@@ -13,6 +13,8 @@ public class HomePage extends BasePage {
     By homePageTitleBy = By.className("title");
     By addToCartButton1By = By.id("add-to-cart-sauce-labs-backpack");
     By addToCartButton2By = By.id("add-to-cart-sauce-labs-bike-light");
+    By addToCartButton5By = By.id("add-to-cart-sauce-labs-onesie");
+    By addToCartButton6By = By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
     By shoppingCartBadgeBy = By.className("shopping_cart_badge");
     By numberOfItemsBy = By.className("inventory_item");
     By menuButtonBy = By.id("react-burger-menu-btn");
@@ -35,13 +37,24 @@ public class HomePage extends BasePage {
         return this; 
     }
 
-    public HomePage verifyProductsAddedToCart(){
+    public HomePage verifyProductAddedToCart(){
         click(addToCartButton1By);
-        click(addToCartButton2By);
         waitVisability(shoppingCartBadgeBy);
         return this;
     }
 
+    public HomePage addProductsToCart(){
+        click(addToCartButton1By);
+        click(addToCartButton2By);
+        waitVisability(shoppingCartBadgeBy);
+        return this;
+        }
+
+    public HomePage addProductsToCartProba(){
+        click(addToCartButton5By);
+        click(addToCartButton6By);
+        return this;
+    }    
 
     public HomePage numberOfItems(int expectedNumberOfItems){
          int actualNumberOfItems = countItems(numberOfItemsBy);
