@@ -41,7 +41,7 @@ public class CartPage extends BasePage {
         return this;
     }
 
-    public CartPage verifyProduct6AddedtoCart(String expectedText){
+    public CartPage verifyProduct6AddedToCart(String expectedText){
         String actualText = readText(testAllTheThingsBy);
         assertTextEquals(expectedText, actualText);
         return this;
